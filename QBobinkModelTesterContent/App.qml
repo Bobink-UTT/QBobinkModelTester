@@ -35,6 +35,37 @@ Window {
                             }
     }
 
+    Connections {
+        target: QBobinkModel
+        onPrintHeadStatusReceived: stats => {
+                                       console.log("XPL PH STATUS")
+                                       console.log(
+                                           "PH 1 status: " + Utils.isPHOk(
+                                               stats, 0))
+                                       console.log(
+                                           "PH 2 status: " + Utils.isPHOk(
+                                               stats, 1))
+                                       console.log(
+                                           "PH 3 status: " + Utils.isPHOk(
+                                               stats, 2))
+                                       console.log(
+                                           "PH 4 status: " + Utils.isPHOk(
+                                               stats, 3))
+                                       console.log(
+                                           "PH 5 status: " + Utils.isPHOk(
+                                               stats, 4))
+                                       console.log(
+                                           "PH 6 status: " + Utils.isPHOk(
+                                               stats, 5))
+                                       console.log(
+                                           "PH 7 status: " + Utils.isPHOk(
+                                               stats, 6))
+                                       console.log(
+                                           "PH 8 status: " + Utils.isPHOk(
+                                               stats, 7))
+                                   }
+    }
+
     Component {
         id: proxyOffComp
 
@@ -102,17 +133,10 @@ Window {
                     spacing: 8
 
                     Row {
-                        TextField {
-                            id: xPLStatusTextField
-                            placeholderText: "Print Head ID"
-                        }
                         Button {
                             text: "SEND XPL PH STATUS REQUEST"
                             onClicked: {
-                                console.log("(" + page.machineId, parseInt(xPLStatusTextField.text) + ")")
-                                QBobinkModel.sendXPLPHStatus(
-                                            page.machineId,
-                                            parseInt(xPLStatusTextField.text))
+                                QBobinkModel.sendXPLPHStatus(page.machineId)
                             }
                         }
                     }
